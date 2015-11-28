@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>四季电台编外主播招募</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<?=$description;?>">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/flat-ui.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/flat-ui.min.js"></script>
+</head>
+
+<body style="background-color: #94c964">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation" style="background-color: #332b27">
+                <div class="navbar-header" >
+                   <a class="navbar-brand" href="./">四季电台编外主播招募系统</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row clearfix show-it">
+
+            <div class="col-md-12 column">
+                <div class="panel panel-info">
+
+                    <div class="panel-body">
+                        <form name="uploadFrom" id="uploadFrom" action="" method="post" target="tarframe" enctype="multipart/form-data" style="background-color: #ffffff">
+                            <input type="hidden" name="name" value="'.$name.'"/>
+                            <input type="hidden" name="sid" value="'.$sid.'"/>
+                            <input type="hidden" name="key" value="'.$key.'"/>
+                            <table class="table table-striped table-bordered white-bg" style="background-color: #ffffff;margin:auto; ">
+                                <tr>
+                                    <th colspan="4"><center>个人基本信息</center></th>
+                                </tr>
+                                <tr>
+                                    <th width="20%">*姓名</th>
+                                    <td width="30%"><input type="text" class="form-control" name="name"  id="name" required/></td>
+									<th width="20%">*性别</th>
+                                    <td width="30%"><select id="sex" class="form-control"><option>请选择你的性别</option><option value="男">男</option><option value="女">女</option></select></td>
+								</tr>
+								<tr>	
+									<th>*学号</th>
+                                    <td><input type="text" class="form-control" name="school_no" id="school_no" required/></td>
+									<th>院系班级</th>
+                                    <td><input type="text" class="form-control"  id="school" required/></td>
+                                </tr>
+                                <tr>
+                                    <th>*联系方式</th>
+                                    <td><input type="text" class="form-control"  id="mobile" required/></td>
+									<th>*qq</th>
+                                    <td><input type="text" class="form-control"  id="qq" required/></td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="3"><center>*1.是否使用过AU或其他音频软件？</center></th>
+									<td>是</td>
+									<td colspan="2"><input type="radio" class="form-control" name="used" id="used" checked="checked" value="是"></td>
+								</tr>
+								<tr>
+									<td>否</td>
+									<td colspan="2"><input type="radio" class="form-control" name="used" id="used" value="否"></td>
+								</tr>
+								<tr>	
+									<td>其他使用过的音频软件</td>
+									<td colspan="2"><input type="text" class="form-control"  id="other" required/></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="1"><center>*2.想做什么类型的电台节目</center></th>
+									<td colspan="3"><textarea type="text" rows="10" class="form-control" name="content" id="media_type" placeholder="说点什么呢……" required></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="1"><center>3.平时有什么兴趣爱好？会听电台吗？会自己写东西吗？</center></th>
+									<td colspan="3"><textarea type="text" rows="10" class="form-control" name="content" id="interesting" placeholder="说点什么呢……" required></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="1"><center>4.你觉得你做编外，最想从这里收获什么？</center></th>
+									<td colspan="3"><textarea type="text" rows="10" class="form-control" name="content" id="learn" placeholder="说点什么呢……" required></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th colspan="1">*5.让四季电台君听见你的声音吧~</br></th>	
+                                    <td colspan="3">
+									(请添加一份原创音频，不限时长，不限内容。可以使自我介绍，也可以是一篇你喜欢的文章，更可以是一期原创节目。)
+									<input type="file" id="upfile" name="upfile" /><br /><input type="button" value="上传" onclick="UploadFile()"/> </td>
+                                </tr>
+								<tr>
+                                   
+                                </tr>
+								<tr>
+                                    <td colspan="4"><center>想骚扰四季君？<br>四季电台交流群：48020855 <br/>四季君QQ：radiosky31@qq.com </center></td>
+                                </tr>
+                            </table>
+                        </form>
+						 <input  class="btn btn-primary btn-lg btn-block" style="background-color:#94c964"  type="button" onclick="submit();" value="提交"/>
+                        
+						
+                        <iframe src="" width="0" height="0" style="display:none;" name="tarframe"></iframe>
+
+
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+    <script>
+        function UploadFile() {
+	
+			alert("文件上传中。。。。耐心等待！");
+            var data = {
+                'school_no':$('#school_no').val()
+                };
+				$.ajaxFileUpload({
+                url: 'http://duomeiti.sky31.com/multimedia/submit.php?ask_method=json&action=upload',
+                secureuri: false,
+                data: data,
+                fileElementId: 'upfile',
+				dataType: 'json',
+                success: function (data) {
+				 alert(data.msg);
+                    
+					
+                    
+
+                }
+
+
+            });
+        }
+
+        function submit(){
+
+
+
+            var data={
+                'UserID':$('#UserID').val(),
+                'name':$('#name').val(),
+                'school_no':$('#school_no').val(),
+                'mobile':$('#mobile').val(),
+                'qq':$('#qq').val(),
+                'school':$('#school').val(),
+                'sex':$('#sex').val(),
+                'media_type':$('#media_type').val(),
+                'interesting':$('#interesting').val(),
+                'learn':$('#learn').val(),
+                'used':$('#used').val(),
+                'other':$('#other').val()
+
+
+            };
+            $.ajax({
+                type:"post",
+                url:"http://duomeiti.sky31.com/multimedia/submit.php?ask_method=json&action=submit",
+                data:data,
+                async:true,
+                beforeSend: function(XMLHttpRequest){
+                },
+                success: function(data){
+
+
+
+                            alert(data.msg);
+
+
+
+
+
+
+
+
+
+                },
+                complete: function(XMLHttpRequest, textStatus){
+                },
+                error: function(){
+                }
+            });
+
+        }
+
+    </script>
+    <script  src="../js/jquery.min.js"></script>
+<script  src="../js/ajaxfileupload.js"></script>
+
+</body>
+</html>
